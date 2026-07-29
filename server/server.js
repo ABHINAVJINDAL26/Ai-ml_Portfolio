@@ -45,3 +45,4 @@ if (process.env.NODE_ENV === 'production') {
 app.listen(PORT, () => {
   console.log(`[Server] Express server running on port: ${PORT}`);
 });
+// Trigger database reload
