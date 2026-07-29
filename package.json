@@ -1,0 +1,17 @@
+{
+  "name": "portfolio-root",
+  "version": "1.0.0",
+  "description": "Root configuration for Data Science Portfolio",
+  "main": "server/server.js",
+  "scripts": {
+    "install-all": "npm install && npm install --prefix client && npm install --prefix server",
+    "client": "npm run dev --prefix client",
+    "server": "npm run dev --prefix server",
+    "dev": "concurrently \"npm run client\" \"npm run server\"",
+    "build": "npm run build --prefix client",
+    "start": "node server/server.js"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
