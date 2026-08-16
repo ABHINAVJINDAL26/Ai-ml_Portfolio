@@ -31,78 +31,97 @@ const Dashboard = ({ theme }) => {
       <section id="about" className="glass-panel border-glow hero-card" style={{ position: 'relative', overflow: 'hidden' }}>
         {/* Decorative Radial Glow */}
         <div style={{
-          position: 'absolute', top: '-40px', right: '-40px', width: '220px', height: '220px',
-          background: 'radial-gradient(circle, rgba(var(--accent-rgb), 0.18) 0%, transparent 70%)',
+          position: 'absolute', top: '-40px', right: '-40px', width: '240px', height: '240px',
+          background: 'radial-gradient(circle, rgba(var(--accent-rgb), 0.2) 0%, transparent 70%)',
           pointerEvents: 'none'
         }} />
         
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
-          <div>
-            <span className="system-badge">
-              SYSTEM_INIT: SUCCESS // DATA_SCIENCE_ENG
-            </span>
-            <h1 className="hero-name">
-              {personal.name}
-            </h1>
-            <p className="glow-cyan hero-title">
-              &gt; {personal.title}
+        <div className="hero-layout-grid">
+          {/* Left Text Column */}
+          <div className="hero-content-col" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div>
+              <span className="system-badge">
+                SYSTEM_INIT: SUCCESS // DATA_SCIENCE_ENG
+              </span>
+              <h1 className="hero-name">
+                {personal.name}
+              </h1>
+              <p className="glow-cyan hero-title">
+                &gt; {personal.title}
+              </p>
+            </div>
+
+            <p className="hero-summary">
+              {personal.summary}
             </p>
+
+            {/* Action CTAs: Download CV & Contact */}
+            <div className="hero-actions">
+              <a
+                href="/Abhinav_Jindal_Resume.pdf"
+                download="Abhinav_Jindal_Resume.pdf"
+                className="tech-button"
+                style={{
+                  background: 'rgba(56, 189, 248, 0.15)',
+                  borderColor: 'var(--accent)',
+                  color: 'var(--accent)',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  padding: '10px 18px',
+                  fontWeight: 600
+                }}
+              >
+                <Download size={16} /> DOWNLOAD_CV.PDF
+              </a>
+
+              <a
+                href="#contact"
+                className="tech-button"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  padding: '10px 18px'
+                }}
+              >
+                <Send size={15} /> INITIALIZE_CONTACT
+              </a>
+            </div>
+
+            <div className="hero-contacts">
+              <a href={`mailto:${personal.email}`} className="hero-contact-item">
+                <Mail size={15} style={{ flexShrink: 0 }} /> <span>{personal.email}</span>
+              </a>
+              <a href={`tel:${personal.phone.replace(/[\s-]/g, '')}`} className="hero-contact-item">
+                <Phone size={15} style={{ flexShrink: 0 }} /> <span>{personal.phone}</span>
+              </a>
+              <span className="hero-contact-item">
+                <MapPin size={15} style={{ flexShrink: 0 }} /> <span>{personal.location}</span>
+              </span>
+              <a href={personal.github} target="_blank" rel="noopener noreferrer" className="hero-contact-item">
+                <Github size={15} style={{ flexShrink: 0 }} /> <span>GitHub</span>
+              </a>
+              <a href={personal.linkedin} target="_blank" rel="noopener noreferrer" className="hero-contact-item">
+                <Linkedin size={15} style={{ flexShrink: 0 }} /> <span>LinkedIn</span>
+              </a>
+            </div>
           </div>
 
-          <p className="hero-summary">
-            {personal.summary}
-          </p>
-
-          {/* Action CTAs: Download CV & Contact */}
-          <div className="hero-actions">
-            <a
-              href="/Abhinav_Jindal_Resume.pdf"
-              download="Abhinav_Jindal_Resume.pdf"
-              className="tech-button"
-              style={{
-                background: 'rgba(56, 189, 248, 0.15)',
-                borderColor: 'var(--accent)',
-                color: 'var(--accent)',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '10px 18px',
-                fontWeight: 600
-              }}
-            >
-              <Download size={16} /> DOWNLOAD_CV.PDF
-            </a>
-
-            <a
-              href="#contact"
-              className="tech-button"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '10px 18px'
-              }}
-            >
-              <Send size={15} /> INITIALIZE_CONTACT
-            </a>
-          </div>
-
-          <div className="hero-contacts">
-            <a href={`mailto:${personal.email}`} className="hero-contact-item">
-              <Mail size={15} style={{ flexShrink: 0 }} /> <span>{personal.email}</span>
-            </a>
-            <a href={`tel:${personal.phone.replace(/[\s-]/g, '')}`} className="hero-contact-item">
-              <Phone size={15} style={{ flexShrink: 0 }} /> <span>{personal.phone}</span>
-            </a>
-            <span className="hero-contact-item">
-              <MapPin size={15} style={{ flexShrink: 0 }} /> <span>{personal.location}</span>
-            </span>
-            <a href={personal.github} target="_blank" rel="noopener noreferrer" className="hero-contact-item">
-              <Github size={15} style={{ flexShrink: 0 }} /> <span>GitHub</span>
-            </a>
-            <a href={personal.linkedin} target="_blank" rel="noopener noreferrer" className="hero-contact-item">
-              <Linkedin size={15} style={{ flexShrink: 0 }} /> <span>LinkedIn</span>
-            </a>
+          {/* Right Profile Photo Avatar Column */}
+          <div className="hero-avatar-col">
+            <div className="hero-avatar-card">
+              <div className="hero-avatar-glow-ring" />
+              <img 
+                src="/profile.jpg" 
+                alt="Abhinav Jindal - Data Science Engineer" 
+                className="hero-avatar-img"
+              />
+              <div className="hero-avatar-badge">
+                <span className="live-status-dot" />
+                <span>ACTIVE // READY TO HIRE</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>

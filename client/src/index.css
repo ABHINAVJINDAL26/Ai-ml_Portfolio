@@ -339,6 +339,83 @@ html, body {
   margin-bottom: 40px;
 }
 
+.hero-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 32px;
+  align-items: center;
+}
+
+.hero-avatar-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-avatar-card {
+  width: 100%;
+  max-width: 250px;
+  height: 290px;
+  border-radius: var(--border-radius-lg);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: rgba(0,0,0,0.2);
+  box-shadow: 0 12px 32px var(--shadow-color), 0 0 20px rgba(var(--accent-rgb), 0.15);
+  transition: all var(--transition-speed) ease;
+}
+
+.hero-avatar-card:hover {
+  border-color: var(--accent-secondary);
+  box-shadow: 0 16px 40px var(--shadow-color), 0 0 25px rgba(var(--accent-secondary-rgb), 0.25);
+  transform: translateY(-3px);
+}
+
+.hero-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+}
+
+.hero-avatar-badge {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  background: rgba(3, 7, 18, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--border-color);
+  padding: 4px 10px;
+  border-radius: 20px;
+  color: var(--accent);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+[data-theme="light"] .hero-avatar-badge {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--accent);
+  border-color: rgba(2, 132, 199, 0.3);
+}
+
+.live-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 6px #22c55e;
+  animation: pulse-glow 1.5s infinite;
+}
+
 .system-badge {
   font-family: var(--font-mono);
   font-size: clamp(0.7rem, 2.2vw, 0.82rem);
@@ -406,6 +483,40 @@ html, body {
 }
 
 /* Mobile responsive menu & multi-device overrides */
+@media (max-width: 900px) {
+  .hero-layout-grid {
+    grid-template-columns: 1fr 200px;
+    gap: 20px;
+  }
+  
+  .hero-avatar-card {
+    height: 240px;
+  }
+}
+
+@media (max-width: 680px) {
+  .hero-layout-grid {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .hero-avatar-card {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.35);
+  }
+
+  .hero-avatar-badge {
+    bottom: -6px;
+    font-size: 0.62rem;
+    padding: 2px 7px;
+  }
+}
+
 @media (max-width: 768px) {
   .nav-menu {
     display: none; /* Hide navigation lists on small screens */
