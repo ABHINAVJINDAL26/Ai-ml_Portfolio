@@ -39,26 +39,26 @@
 
 /* Theme Configuration: Light Mode */
 [data-theme="light"] {
-  --bg-primary: #f8fafc; /* Sleek Slate White */
+  --bg-primary: #f8fafc; /* Crisp Modern Slate */
   --bg-primary-rgb: 248, 250, 252;
-  --bg-secondary: #ffffff; /* Bright Pure White */
-  --bg-tertiary: #e2e8f0; /* Soft slate gray */
-  --text-primary: #0f172a; /* Deep charcoal */
-  --text-secondary: #475569; /* Slate gray */
-  --text-muted: #94a3b8;
-  --accent: #0f766e; /* Deep Tech Teal */
-  --accent-secondary: #2563eb; /* Cyber Tech Blue */
-  --accent-rgb: 15, 118, 110;
-  --accent-secondary-rgb: 37, 99, 235;
-  --border-color: rgba(15, 118, 110, 0.15);
-  --border-hover: rgba(37, 99, 235, 0.4);
-  --glass-bg: rgba(255, 255, 255, 0.8);
-  --glass-border: rgba(15, 118, 110, 0.08);
-  --grid-color: rgba(15, 118, 110, 0.04);
+  --bg-secondary: #ffffff; /* Pure White */
+  --bg-tertiary: #f1f5f9; /* Soft Slate */
+  --text-primary: #0f172a; /* Deep Charcoal */
+  --text-secondary: #334155; /* Slate Gray with high readability */
+  --text-muted: #64748b;
+  --accent: #0284c7; /* Electric Cyan Blue */
+  --accent-secondary: #059669; /* Vivid Emerald */
+  --accent-rgb: 2, 132, 199;
+  --accent-secondary-rgb: 5, 150, 105;
+  --border-color: rgba(2, 132, 199, 0.22);
+  --border-hover: rgba(2, 132, 199, 0.5);
+  --glass-bg: rgba(255, 255, 255, 0.9);
+  --glass-border: rgba(148, 163, 184, 0.2);
+  --grid-color: rgba(2, 132, 199, 0.06);
   --shadow-color: rgba(15, 23, 42, 0.08);
-  --terminal-bg: #0f172a;
-  --terminal-header: #1e293b;
-  --terminal-text: #38bdf8; /* Cyber Light Blue */
+  --terminal-bg: #070d18;
+  --terminal-header: #0e1726;
+  --terminal-text: #38bdf8;
 }
 
 /* CSS Reset & Defaults */

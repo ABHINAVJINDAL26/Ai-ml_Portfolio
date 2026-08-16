@@ -7,8 +7,8 @@ const Terminal = ({ setMode, theme }) => {
   const [history, setHistory] = useState([
     { text: '====================================================================', type: 'system' },
     { text: '  🧬 ABHINAV JINDAL - DATA SCIENCE ENGINEER PORTFOLIO SHELL v1.0.4 🧬', type: 'welcome' },
-    { text: '  Type "help" to display available terminal commands.', type: 'welcome' },
-    { text: '  Type "gui" to exit CLI and launch the Visual Dashboard.', type: 'welcome' },
+    { text: '  Type "help" to display available terminal commands.', type: 'help-cmd' },
+    { text: '  Type "gui" to exit CLI and launch the Visual Dashboard.', type: 'help-cmd' },
     { text: '====================================================================', type: 'system' },
   ]);
 
@@ -71,29 +71,31 @@ const Terminal = ({ setMode, theme }) => {
     switch (primaryCmd) {
       case 'help':
         output.push(
-          { text: 'Available commands:', type: 'system' },
-          { text: '  help          - Display this instruction panel', type: 'help' },
-          { text: '  about / bio   - Read professional summary & bio', type: 'help' },
-          { text: '  skills        - Print hierarchical technical skills tree', type: 'help' },
-          { text: '  projects / ls - List machine learning engineering projects', type: 'help' },
-          { text: '  project <num> - Inspect specific project details (e.g. project 1)', type: 'help' },
-          { text: '  experience    - Read AI & Cloud internship records', type: 'help' },
-          { text: '  education     - Print academic profile', type: 'help' },
-          { text: '  certs         - Display certification credentials', type: 'help' },
-          { text: '  contact       - Print direct secure comm channels', type: 'help' },
-          { text: '  gui           - Switch to the graphical dashboard mode', type: 'help' },
-          { text: '  clear / cls   - Wipe the terminal display buffer', type: 'help' }
+          { text: 'AVAILABLE COMMANDS & INSTRUCTIONS:', type: 'system-heading' },
+          { text: '  help          - Display this instruction panel', type: 'help-cmd' },
+          { text: '  about / bio   - Read professional summary & bio', type: 'help-cmd' },
+          { text: '  skills        - Print hierarchical technical skills tree', type: 'help-cmd' },
+          { text: '  projects / ls - List machine learning engineering projects', type: 'help-cmd' },
+          { text: '  project <num> - Inspect specific project details (e.g. project 1)', type: 'help-cmd' },
+          { text: '  experience    - Read AI & Cloud internship records', type: 'help-cmd' },
+          { text: '  education     - Print academic profile', type: 'help-cmd' },
+          { text: '  certs         - Display certification credentials', type: 'help-cmd' },
+          { text: '  contact       - Print direct secure comm channels', type: 'help-cmd' },
+          { text: '  gui           - Switch to the graphical dashboard mode', type: 'help-cmd' },
+          { text: '  clear / cls   - Wipe the terminal display buffer', type: 'help-cmd' }
         );
         break;
 
       case 'about':
       case 'bio':
         output.push(
-          { text: `[Identity]: ${personal.name}`, type: 'success' },
+          { text: `[Identity]:    ${personal.name}`, type: 'success' },
           { text: `[Designation]: ${personal.title}`, type: 'accent' },
-          { text: `[Locality]: ${personal.location}`, type: 'info' },
+          { text: `[Locality]:    ${personal.location}`, type: 'info' },
+          { text: `[Phone]:       ${personal.phone}`, type: 'info' },
+          { text: `[Email]:       ${personal.email}`, type: 'accent' },
           { text: '', type: 'info' },
-          { text: personal.summary, type: 'info' }
+          { text: `[Summary]:\n${personal.summary}`, type: 'info' }
         );
         break;
 
@@ -117,14 +119,14 @@ const Terminal = ({ setMode, theme }) => {
 
       case 'projects':
       case 'ls':
-        output.push({ text: 'Active project directories:', type: 'success' });
+        output.push({ text: 'Active Project Repositories:', type: 'system-heading' });
         projects.forEach((p, idx) => {
           output.push({ 
             text: `  [Project ${idx + 1}] : ${p.title} - ${p.subtitle} (${p.period})`, 
             type: 'info' 
           });
         });
-        output.push({ text: 'Type "project <num>" (e.g. project 1) to inspect details.', type: 'system' });
+        output.push({ text: 'Type "project <num>" (e.g. project 1) to inspect full project specs.', type: 'system' });
         break;
 
       case 'project': {
@@ -152,10 +154,10 @@ const Terminal = ({ setMode, theme }) => {
       }
 
       case 'experience':
-        output.push({ text: 'Work Experience Log:', type: 'success' });
+        output.push({ text: 'Work Experience Log:', type: 'system-heading' });
         internships.forEach(job => {
           output.push(
-            { text: `\n[Role]: ${job.role}`, type: 'accent' },
+            { text: `\n[Role]:     ${job.role}`, type: 'accent' },
             { text: `[Employer]: ${job.company} (${job.period})`, type: 'info' },
             { text: 'Highlights:', type: 'success' },
             ...job.highlights.map(h => ({ text: `  * ${h}`, type: 'info' }))
@@ -164,7 +166,7 @@ const Terminal = ({ setMode, theme }) => {
         break;
 
       case 'education':
-        output.push({ text: 'Academic Profile Log:', type: 'success' });
+        output.push({ text: 'Academic Profile Log:', type: 'system-heading' });
         education.forEach(edu => {
           output.push(
             { text: `\nInstitution: ${edu.institution}`, type: 'accent' },
@@ -176,7 +178,7 @@ const Terminal = ({ setMode, theme }) => {
         break;
 
       case 'certs':
-        output.push({ text: 'Certification Keys:', type: 'success' });
+        output.push({ text: 'Certification Keys:', type: 'system-heading' });
         certificates.forEach(c => {
           output.push({ text: `  - ${c.title} [Issuer: ${c.issuer}] (${c.date})`, type: 'info' });
         });
@@ -184,7 +186,7 @@ const Terminal = ({ setMode, theme }) => {
 
       case 'contact':
         output.push(
-          { text: 'Secure Comms Gateway Channels:', type: 'success' },
+          { text: 'Secure Comms Gateway Channels:', type: 'system-heading' },
           { text: `  Email:    ${personal.email}`, type: 'accent' },
           { text: `  Phone:    ${personal.phone}`, type: 'info' },
           { text: `  LinkedIn: ${personal.linkedin}`, type: 'info' },
@@ -220,9 +222,34 @@ const Terminal = ({ setMode, theme }) => {
     setHistoryIndex(-1);
   };
 
-  // Styles computed based on theme
-  const cliTextHex = theme === 'dark' ? 'var(--terminal-text)' : 'var(--text-primary)';
-  const cliBgHex = 'var(--terminal-bg)';
+  // High-contrast color palette guaranteed across light and dark modes
+  const getLineColor = (type) => {
+    switch (type) {
+      case 'error':
+        return '#f87171'; // Vibrant Red
+      case 'success':
+        return '#4ade80'; // Bright Green
+      case 'welcome':
+        return '#00ff88'; // Matrix Neon Green
+      case 'accent':
+        return '#38bdf8'; // Electric Cyan
+      case 'help-cmd':
+        return '#7dd3fc'; // High-contrast readable Cyan/Sky
+      case 'system-heading':
+        return '#facc15'; // Amber/Gold header
+      case 'system':
+        return '#94a3b8'; // Cool Gray
+      case 'tree':
+        return '#00ff88'; // Matrix Green
+      case 'tree-leaf':
+        return '#cbd5e1'; // Light Silver Slate
+      case 'input':
+        return '#ffffff'; // Pure White
+      case 'info':
+      default:
+        return '#e2e8f0'; // Crisp Off-White (Never blends into dark console)
+    }
+  };
 
   return (
     <div className="container" style={{ paddingBottom: '40px', paddingTop: '30px' }}>
@@ -230,7 +257,7 @@ const Terminal = ({ setMode, theme }) => {
         onClick={handleTerminalClick}
         className="crt-screen"
         style={{
-          background: cliBgHex,
+          background: '#070d18',
           border: '1px solid var(--border-color)',
           boxShadow: '0 10px 40px rgba(0,0,0,0.6)',
           borderRadius: 'var(--border-radius-md)',
@@ -249,12 +276,12 @@ const Terminal = ({ setMode, theme }) => {
           top: 0,
           left: 0,
           right: 0,
-          background: 'var(--terminal-header)',
-          padding: '8px 16px',
+          background: '#0e1726',
+          padding: '10px 16px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          borderBottom: '1px solid var(--glass-border)',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
           borderTopLeftRadius: 'var(--border-radius-md)',
           borderTopRightRadius: 'var(--border-radius-md)',
           zIndex: 5
@@ -264,40 +291,38 @@ const Terminal = ({ setMode, theme }) => {
             <span style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#f59e0b', display: 'inline-block' }}></span>
             <span style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#10b981', display: 'inline-block' }}></span>
           </div>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-            visitor@abhinav-jindal-ds: ~
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', color: '#94a3b8', letterSpacing: '0.5px' }}>
+            visitor@abhinav-jindal-ds: ~ (BASH SHELL)
           </span>
-          <span style={{ width: '40px' }}></span>
+          <button
+            onClick={(e) => { e.stopPropagation(); setMode('gui'); }}
+            className="tech-button"
+            style={{ fontSize: '0.7rem', padding: '4px 8px', height: 'auto', border: '1px solid rgba(56, 189, 248, 0.3)', color: '#38bdf8' }}
+          >
+            LAUNCH_GUI
+          </button>
         </div>
 
         {/* Console Outputs */}
         <div style={{ 
-          marginTop: '25px', 
+          marginTop: '35px', 
           flexGrow: 1, 
           overflowY: 'auto', 
           fontFamily: 'var(--font-mono)', 
-          fontSize: '0.9rem', 
-          lineHeight: '1.6',
+          fontSize: 'clamp(0.82rem, 2.2vw, 0.92rem)', 
+          lineHeight: '1.65',
           paddingBottom: '20px'
         }}>
           {history.map((line, idx) => {
-            let color = cliTextHex;
-            if (line.type === 'error') color = '#ef4444';
-            else if (line.type === 'success') color = '#10b981';
-            else if (line.type === 'welcome') color = 'var(--accent)';
-            else if (line.type === 'accent') color = 'var(--accent-secondary)';
-            else if (line.type === 'system') color = 'var(--text-muted)';
-            else if (line.type === 'tree') color = 'var(--accent)';
-            else if (line.type === 'tree-leaf') color = 'var(--text-secondary)';
-            else if (line.type === 'input') color = '#ffffff';
-
+            const color = getLineColor(line.type);
             return (
               <div 
                 key={idx} 
                 style={{ 
                   color, 
                   whiteSpace: 'pre-wrap', 
-                  textShadow: theme === 'dark' ? `0 0 3px ${color}88` : 'none' 
+                  textShadow: '0 0 2px rgba(0,0,0,0.5)',
+                  marginBottom: line.text === '' ? '8px' : '2px'
                 }}
               >
                 {line.text}
@@ -314,12 +339,12 @@ const Terminal = ({ setMode, theme }) => {
             display: 'flex', 
             alignItems: 'center', 
             fontFamily: 'var(--font-mono)', 
-            fontSize: '0.95rem',
-            borderTop: '1px solid rgba(255,255,255,0.05)',
-            paddingTop: '12px'
+            fontSize: 'clamp(0.85rem, 2.2vw, 0.95rem)',
+            borderTop: '1px solid rgba(255,255,255,0.08)',
+            paddingTop: '14px'
           }}
         >
-          <span style={{ color: 'var(--accent)', marginRight: '8px', whiteSpace: 'nowrap' }}>
+          <span style={{ color: '#00ff88', marginRight: '8px', whiteSpace: 'nowrap', fontWeight: 600 }}>
             visitor@abhinav-jindal-ds:~$
           </span>
           <input
@@ -330,6 +355,7 @@ const Terminal = ({ setMode, theme }) => {
             onKeyDown={handleKeyDown}
             autoComplete="off"
             spellCheck="false"
+            placeholder="Type 'help' for commands..."
             style={{
               flexGrow: 1,
               background: 'transparent',
@@ -337,8 +363,8 @@ const Terminal = ({ setMode, theme }) => {
               outline: 'none',
               color: '#ffffff',
               fontFamily: 'var(--font-mono)',
-              fontSize: '0.95rem',
-              caretColor: 'var(--accent)'
+              fontSize: 'inherit',
+              caretColor: '#00ff88'
             }}
           />
         </form>
