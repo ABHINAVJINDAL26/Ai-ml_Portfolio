@@ -3,6 +3,7 @@ import { Terminal as TerminalIcon, Layout, Moon, Sun, Shield } from 'lucide-reac
 import ThreeCanvas from './components/ThreeCanvas';
 import Dashboard from './components/Dashboard';
 import Terminal from './components/Terminal';
+import ErrorBoundary from './components/ErrorBoundary';
 
 function App() {
   const [theme, setTheme] = useState(() => {
@@ -47,8 +48,10 @@ function App() {
 
   return (
     <>
-      {/* 3D Interactive Particle Network */}
-      <ThreeCanvas theme={theme} />
+      {/* 3D Interactive Particle Network wrapped in ErrorBoundary to prevent WebGL crash cascading */}
+      <ErrorBoundary fallback={<div className="three-fallback-bg" />}>
+        <ThreeCanvas theme={theme} />
+      </ErrorBoundary>
 
       {/* Cybernetic Tech Grid Dots */}
       <div className="tech-grid-bg" />
@@ -156,20 +159,23 @@ function App() {
       }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '6px' }}>
           <Shield size={12} style={{ color: 'var(--accent-secondary)' }} />
-          <span>SECURITY STATUS: SECURE_COMMS_ACTIVE // PRESS F12 TO ANALYZE NETWORKS</span>
+          <span>SECURITY STATUS: SECURE_COMMS_ACTIVE // 99.99% HIGH AVAILABILITY</span>
         </div>
       </div>
 
-      {/* Primary Application Content */}
+      {/* Primary Application Content with Fault-Tolerance */}
       <main style={{ minHeight: 'calc(100vh - 100px)' }}>
-        {mode === 'gui' ? (
-          <Dashboard theme={theme} />
-        ) : (
-          <Terminal setMode={setMode} theme={theme} />
-        )}
+        <ErrorBoundary>
+          {mode === 'gui' ? (
+            <Dashboard theme={theme} />
+          ) : (
+            <Terminal setMode={setMode} theme={theme} />
+          )}
+        </ErrorBoundary>
       </main>
     </>
   );
 }
 
 export default App;
+

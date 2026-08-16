@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   Mail, Phone, MapPin, Github, Linkedin, Cpu, LineChart, 
-  Calendar, Award, BookOpen, ExternalLink, GitBranch, ArrowRight, Server, Terminal, ShieldCheck
+  Calendar, Award, BookOpen, ExternalLink, GitBranch, ArrowRight, Server, Terminal, ShieldCheck, Download, Send
 } from 'lucide-react';
 import { cvData } from '../data/cvData';
 import ContactForm from './ContactForm';
@@ -53,6 +53,40 @@ const Dashboard = ({ theme }) => {
             {personal.summary}
           </p>
 
+          {/* Action CTAs: Download CV & Contact */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', marginTop: '5px' }}>
+            <a
+              href="/Abhinav_Jindal_Resume.pdf"
+              download="Abhinav_Jindal_Resume.pdf"
+              className="tech-button"
+              style={{
+                background: 'rgba(56, 189, 248, 0.15)',
+                borderColor: 'var(--accent)',
+                color: 'var(--accent)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '10px 18px',
+                fontWeight: 600
+              }}
+            >
+              <Download size={16} /> DOWNLOAD_CV.PDF
+            </a>
+
+            <a
+              href="#contact"
+              className="tech-button"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '10px 18px'
+              }}
+            >
+              <Send size={15} /> INITIALIZE_CONTACT
+            </a>
+          </div>
+
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', marginTop: '10px', borderTop: '1px solid var(--glass-border)', paddingTop: '20px' }}>
             <a href={`mailto:${personal.email}`} style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.9rem', transition: 'color 0.3s' }} onMouseEnter={(e)=>e.target.style.color='var(--accent)'} onMouseLeave={(e)=>e.target.style.color='var(--text-secondary)'}>
               <Mail size={16} /> {personal.email}
@@ -72,6 +106,7 @@ const Dashboard = ({ theme }) => {
           </div>
         </div>
       </section>
+
 
       {/* 2. Skills Engine (Interactive Layout) */}
       <section id="skills" style={{ marginBottom: '60px' }}>
