@@ -477,3 +477,50 @@ html, body {
   }
 }
 
+/* Modern Card Hover & Micro-Animations */
+.skill-card-modern {
+  cursor: pointer;
+  background: var(--glass-bg);
+}
+
+.skill-badge-item {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+[data-theme="light"] .skill-badge-item {
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #1e293b !important;
+  font-weight: 500;
+}
+
+[data-theme="light"] .skill-badge-item:hover {
+  background: #e0f2fe !important;
+  border-color: #0284c7 !important;
+  color: #0369a1 !important;
+}
+
+[data-theme="light"] .glass-panel {
+  background: rgba(255, 255, 255, 0.94) !important;
+  border-color: rgba(203, 213, 225, 0.8) !important;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06) !important;
+}
+
+[data-theme="light"] .tech-button {
+  background: #ffffff;
+  color: #0284c7;
+  border-color: #0284c7;
+  font-weight: 600;
+}
+
+[data-theme="light"] .tech-button:hover {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0284c7;
+}
+
+[data-theme="light"] .tech-button.active {
+  background: #0284c7 !important;
+  color: #ffffff !important;
+}
+

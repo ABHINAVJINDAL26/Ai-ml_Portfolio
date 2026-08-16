@@ -1,34 +1,38 @@
 import React, { useState } from 'react';
 import { 
   Mail, Phone, MapPin, Github, Linkedin, Cpu, LineChart, 
-  Calendar, Award, BookOpen, ExternalLink, GitBranch, ArrowRight, Server, Terminal, ShieldCheck, Download, Send
+  Calendar, Award, BookOpen, ExternalLink, GitBranch, ArrowRight, Server, Terminal, ShieldCheck, Download, Send,
+  Activity, Layers, Database, Sparkles, TrendingUp, CheckCircle2
 } from 'lucide-react';
 import { cvData } from '../data/cvData';
 import ContactForm from './ContactForm';
+import SkillVisualizer from './SkillVisualizer';
+import ProjectChart from './ProjectChart';
 
 const Dashboard = ({ theme }) => {
   const { personal, skills, internships, projects, education, certificates } = cvData;
   const [activeProjectTab, setActiveProjectTab] = useState(0);
 
-  // Parse skill groups for display
-  const skillCategories = [
-    { title: "Languages", list: skills.languages, color: "var(--accent)" },
-    { title: "Machine Learning", list: skills.machineLearning, color: "var(--accent-secondary)" },
-    { title: "Analysis & Visuals", list: skills.dataAnalysis, color: "var(--accent)" },
-    { title: "Backend & Databases", list: skills.backendDatabases, color: "var(--accent-secondary)" },
-    { title: "Developer Tools", list: skills.developerTools, color: "var(--accent)" },
-    { title: "Core Concepts", list: skills.coreConcepts, color: "var(--accent-secondary)" }
+  const stats = [
+    { label: 'ML & FORECAST PIPELINES', value: '3+', sub: 'ARIMA, SARIMA, XGBoost', icon: BrainCircuitIcon, color: 'var(--accent)' },
+    { label: 'CLOUD INFERENCE ACCURACY', value: '81%', sub: 'IBM Watson Studio REST API', icon: Activity, color: 'var(--accent-secondary)' },
+    { label: 'ACADEMIC EXCELLENCE', value: '8.00', sub: 'CGPA // 96.4% Class XII', icon: Award, color: '#f59e0b' },
+    { label: 'FULL-STACK DATA ENGINES', value: '100%', sub: 'FastAPI, MERN, Docker', icon: Database, color: '#818cf8' }
   ];
 
+  function BrainCircuitIcon(props) {
+    return <Cpu {...props} />;
+  }
+
   return (
-    <div className="container" style={{ paddingBottom: '80px', paddingTop: '40px' }}>
+    <div className="container" style={{ paddingBottom: '80px', paddingTop: '30px' }}>
       
       {/* 1. Hero / Identity Section */}
       <section id="about" className="glass-panel border-glow hero-card" style={{ position: 'relative', overflow: 'hidden' }}>
-        {/* Decorative Grid Line */}
+        {/* Decorative Radial Glow */}
         <div style={{
-          position: 'absolute', top: 0, right: 0, width: '120px', height: '120px',
-          background: 'radial-gradient(circle, rgba(var(--accent-rgb), 0.15) 0%, transparent 70%)',
+          position: 'absolute', top: '-40px', right: '-40px', width: '220px', height: '220px',
+          background: 'radial-gradient(circle, rgba(var(--accent-rgb), 0.18) 0%, transparent 70%)',
           pointerEvents: 'none'
         }} />
         
@@ -103,102 +107,98 @@ const Dashboard = ({ theme }) => {
         </div>
       </section>
 
+      {/* 2. Key Metrics Telemetry Ribbon */}
+      <section style={{ marginBottom: '50px' }}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+          gap: '16px'
+        }}>
+          {stats.map((stat, sIdx) => {
+            const IconComp = stat.icon;
+            return (
+              <div 
+                key={sIdx} 
+                className="glass-panel border-glow"
+                style={{ 
+                  padding: '18px 20px', 
+                  display: 'flex', 
+                  flexDirection: 'column', 
+                  gap: '6px',
+                  position: 'relative',
+                  overflow: 'hidden'
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                    {stat.label}
+                  </span>
+                  <IconComp size={16} style={{ color: stat.color }} />
+                </div>
+                <div style={{ fontSize: '1.8rem', fontWeight: 800, color: stat.color, fontFamily: 'var(--font-mono)' }}>
+                  {stat.value}
+                </div>
+                <span style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
+                  {stat.sub}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      </section>
 
-      {/* 2. Skills Engine (Interactive Layout) */}
+      {/* 3. Skills Matrix with Interactive Radar & Visual Grid */}
       <section id="skills" style={{ marginBottom: '60px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '30px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
           <Cpu size={24} style={{ color: 'var(--accent)' }} />
           <h2 style={{ fontSize: '1.75rem', fontWeight: 700 }}>TECHNICAL_SKILL_TREE</h2>
         </div>
 
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
-          gap: '24px' 
-        }}>
-          {skillCategories.map((cat, idx) => (
-            <div key={idx} className="glass-panel border-glow" style={{ padding: '24px', transition: 'all 0.3s ease' }}>
-              <h3 style={{ 
-                fontFamily: 'var(--font-mono)', 
-                fontSize: '1rem', 
-                color: cat.color, 
-                marginBottom: '16px',
-                borderBottom: '1px solid var(--glass-border)',
-                paddingBottom: '8px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between'
-              }}>
-                <span>{`[0${idx + 1}] ${cat.title}`}</span>
-                <span style={{ fontSize: '0.75rem', opacity: 0.6 }}>ACTIVE</span>
-              </h3>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                {cat.list.map((skill, sIdx) => (
-                  <span 
-                    key={sIdx} 
-                    style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.85rem',
-                      background: 'rgba(0,0,0,0.15)',
-                      border: '1px solid var(--glass-border)',
-                      padding: '6px 12px',
-                      borderRadius: 'var(--border-radius-sm)',
-                      color: 'var(--text-primary)',
-                      transition: 'all 0.3s',
-                      cursor: 'default'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.target.style.borderColor = cat.color;
-                      e.target.style.boxShadow = `0 0 8px ${cat.color}`;
-                    }}
-                    onMouseLeave={(e) => {
-                      e.target.style.borderColor = 'var(--glass-border)';
-                      e.target.style.boxShadow = 'none';
-                    }}
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
+        <SkillVisualizer skills={skills} theme={theme} />
       </section>
 
-      {/* 3. Project Matrix */}
+      {/* 4. Project Matrix with Live Simulation Charts */}
       <section id="projects" style={{ marginBottom: '60px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '30px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
           <LineChart size={24} style={{ color: 'var(--accent-secondary)' }} />
-          <h2 style={{ fontSize: '1.75rem', fontWeight: 700 }}>ML_PROJECT_MATRIX</h2>
+          <h2 style={{ fontSize: '1.75rem', fontWeight: 700 }}>ML_PROJECT_MATRIX & PIPELINE_SIMULATION</h2>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '30px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px' }}>
           {/* Project Tabs Selector */}
-          <div style={{ display: 'flex', borderBottom: '1px solid var(--glass-border)', gap: '10px', overflowX: 'auto', paddingBottom: '10px' }}>
+          <div style={{ 
+            display: 'flex', 
+            borderBottom: '1px solid var(--glass-border)', 
+            gap: '10px', 
+            overflowX: 'auto', 
+            paddingBottom: '10px' 
+          }}>
             {projects.map((proj, idx) => (
               <button
                 key={idx}
                 onClick={() => setActiveProjectTab(idx)}
                 style={{
                   fontFamily: 'var(--font-mono)',
-                  padding: '8px 16px',
-                  background: activeProjectTab === idx ? 'rgba(var(--accent-secondary-rgb), 0.1)' : 'transparent',
+                  fontSize: '0.85rem',
+                  padding: '10px 18px',
+                  background: activeProjectTab === idx ? 'rgba(var(--accent-secondary-rgb), 0.12)' : 'transparent',
                   color: activeProjectTab === idx ? 'var(--accent-secondary)' : 'var(--text-secondary)',
                   border: '1px solid',
                   borderColor: activeProjectTab === idx ? 'var(--accent-secondary)' : 'transparent',
                   borderRadius: 'var(--border-radius-sm)',
                   cursor: 'pointer',
                   whiteSpace: 'nowrap',
+                  fontWeight: activeProjectTab === idx ? 600 : 400,
                   transition: 'all 0.3s'
                 }}
               >
-                {proj.title}
+                {`[0${idx + 1}] ${proj.title}`}
               </button>
             ))}
           </div>
 
-          {/* Active Project Details */}
-          <div className="glass-panel border-glow" style={{ padding: '32px', position: 'relative' }}>
+          {/* Active Project Details + Live Chart Visualizer */}
+          <div className="glass-panel border-glow" style={{ padding: '30px', position: 'relative' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '15px', marginBottom: '16px' }}>
               <div>
                 <h3 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-primary)' }}>
@@ -208,8 +208,17 @@ const Dashboard = ({ theme }) => {
                   {projects[activeProjectTab].subtitle}
                 </h4>
               </div>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-                {projects[activeProjectTab].period}
+              <span style={{ 
+                fontFamily: 'var(--font-mono)', 
+                fontSize: '0.8rem', 
+                color: 'var(--accent-secondary)',
+                background: 'rgba(var(--accent-secondary-rgb), 0.08)',
+                padding: '4px 10px',
+                borderRadius: '4px',
+                border: '1px solid rgba(var(--accent-secondary-rgb), 0.2)',
+                alignSelf: 'flex-start'
+              }}>
+                TIMELINE: {projects[activeProjectTab].period}
               </span>
             </div>
 
@@ -222,9 +231,9 @@ const Dashboard = ({ theme }) => {
               display: 'flex', 
               flexWrap: 'wrap', 
               gap: '15px', 
-              marginBottom: '24px',
+              marginBottom: '20px',
               padding: '16px',
-              background: 'rgba(0,0,0,0.15)',
+              background: 'rgba(0,0,0,0.12)',
               borderRadius: 'var(--border-radius-md)',
               borderLeft: '3px solid var(--accent-secondary)'
             }}>
@@ -233,22 +242,25 @@ const Dashboard = ({ theme }) => {
                   <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                     {key.toUpperCase()}
                   </div>
-                  <div style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--accent-secondary)', marginTop: '4px' }}>
+                  <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--accent-secondary)', marginTop: '4px' }}>
                     {val}
                   </div>
                 </div>
               ))}
             </div>
 
+            {/* Live Model Simulation Visualization */}
+            <ProjectChart projectId={activeProjectTab} theme={theme} />
+
             {/* Implementation Highlights */}
-            <div style={{ marginBottom: '24px' }}>
+            <div style={{ marginTop: '24px', marginBottom: '24px' }}>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '12px' }}>
-                COMPILATION_LOG / ACTIONS:
+                COMPILATION_LOG / ARCHITECTURE ACTIONS:
               </div>
-              <ul style={{ listStyleType: 'none', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <ul style={{ listStyleType: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 {projects[activeProjectTab].details.map((detail, idx) => (
-                  <li key={idx} style={{ display: 'flex', gap: '8px', color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.5' }}>
-                    <span style={{ color: 'var(--accent)' }}>▶</span>
+                  <li key={idx} style={{ display: 'flex', gap: '10px', color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.55' }}>
+                    <span style={{ color: 'var(--accent)', flexShrink: 0 }}>▶</span>
                     <span>{detail}</span>
                   </li>
                 ))}
@@ -261,8 +273,8 @@ const Dashboard = ({ theme }) => {
                 {projects[activeProjectTab].techStack.map((tech, idx) => (
                   <span key={idx} style={{ 
                     fontFamily: 'var(--font-mono)', fontSize: '0.75rem', 
-                    background: 'rgba(var(--accent-rgb), 0.05)', color: 'var(--accent)', 
-                    border: '1px solid rgba(var(--accent-rgb), 0.15)', padding: '2px 8px', borderRadius: '4px' 
+                    background: 'rgba(var(--accent-rgb), 0.06)', color: 'var(--accent)', 
+                    border: '1px solid rgba(var(--accent-rgb), 0.2)', padding: '3px 9px', borderRadius: '4px' 
                   }}>
                     {tech}
                   </span>
@@ -275,42 +287,50 @@ const Dashboard = ({ theme }) => {
                 rel="noopener noreferrer"
                 className="tech-button"
               >
-                <Github size={14} /> VIEW_SOURCE <ExternalLink size={12} />
+                <Github size={14} /> VIEW_SOURCE_CODE <ExternalLink size={12} />
               </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 4. Experience Timeline */}
+      {/* 5. Experience Timeline */}
       <section id="experience" style={{ marginBottom: '60px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '30px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
           <GitBranch size={24} style={{ color: 'var(--accent)' }} />
           <h2 style={{ fontSize: '1.75rem', fontWeight: 700 }}>WORK_TIMELINE_LOG</h2>
         </div>
 
-        <div className="glass-panel border-glow" style={{ padding: '32px' }}>
+        <div className="glass-panel border-glow" style={{ padding: '30px' }}>
           {internships.map((job, idx) => (
             <div key={idx} style={{ position: 'relative' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '10px', marginBottom: '10px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '10px', marginBottom: '12px' }}>
                 <div>
                   <h3 style={{ fontSize: '1.25rem', fontWeight: 700 }}>{job.role}</h3>
-                  <h4 style={{ fontFamily: 'var(--font-mono)', fontSize: '0.9rem', color: 'var(--accent-secondary)', marginTop: '2px' }}>
+                  <h4 style={{ fontFamily: 'var(--font-mono)', fontSize: '0.95rem', color: 'var(--accent-secondary)', marginTop: '2px' }}>
                     {job.company}
                   </h4>
                 </div>
                 <div style={{ textAlign: 'right' }}>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+                  <span style={{ 
+                    fontFamily: 'var(--font-mono)', 
+                    fontSize: '0.8rem', 
+                    color: 'var(--accent)',
+                    background: 'rgba(var(--accent-rgb), 0.08)',
+                    padding: '3px 8px',
+                    borderRadius: '4px',
+                    border: '1px solid rgba(var(--accent-rgb), 0.2)'
+                  }}>
                     {job.period}
                   </span>
                 </div>
               </div>
 
               <div style={{ marginTop: '15px' }}>
-                <ul style={{ listStyleType: 'none', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <ul style={{ listStyleType: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   {job.highlights.map((highlight, hIdx) => (
-                    <li key={hIdx} style={{ display: 'flex', gap: '8px', color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.5' }}>
-                      <span style={{ color: 'var(--accent-secondary)' }}>&gt;</span>
+                    <li key={hIdx} style={{ display: 'flex', gap: '10px', color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.55' }}>
+                      <span style={{ color: 'var(--accent-secondary)', flexShrink: 0 }}>&gt;</span>
                       <span>{highlight}</span>
                     </li>
                   ))}
@@ -321,9 +341,9 @@ const Dashboard = ({ theme }) => {
         </div>
       </section>
 
-      {/* 5. Education & Certifications (Server blades grid) */}
+      {/* 6. Education & Certifications */}
       <section id="education" style={{ marginBottom: '60px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px' }}>
           
           {/* Education Module */}
           <div>
@@ -331,23 +351,24 @@ const Dashboard = ({ theme }) => {
               <BookOpen size={20} style={{ color: 'var(--accent-secondary)' }} />
               <h3 style={{ fontSize: '1.3rem', fontWeight: 700 }}>ACADEMIC_RECORD</h3>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               {education.map((edu, idx) => (
                 <div key={idx} className="glass-panel border-glow" style={{ padding: '20px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)', marginBottom: '8px' }}>
                     <span>{edu.period}</span>
                     <span>{edu.location}</span>
                   </div>
-                  <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-primary)' }}>
+                  <h4 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--text-primary)' }}>
                     {edu.institution}
                   </h4>
                   <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginTop: '2px' }}>
                     {edu.degree}
                   </p>
                   <div style={{ 
-                    fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--accent)', 
-                    marginTop: '8px', background: 'rgba(var(--accent-rgb), 0.05)', 
-                    display: 'inline-block', padding: '2px 8px', borderRadius: '4px' 
+                    fontFamily: 'var(--font-mono)', fontSize: '0.82rem', color: 'var(--accent)', 
+                    marginTop: '10px', background: 'rgba(var(--accent-rgb), 0.08)', 
+                    display: 'inline-block', padding: '3px 10px', borderRadius: '4px',
+                    border: '1px solid rgba(var(--accent-rgb), 0.2)'
                   }}>
                     {edu.score}
                   </div>
@@ -362,18 +383,26 @@ const Dashboard = ({ theme }) => {
               <Award size={20} style={{ color: 'var(--accent)' }} />
               <h3 style={{ fontSize: '1.3rem', fontWeight: 700 }}>QUALIFICATION_KEYS</h3>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               {certificates.map((cert, idx) => (
                 <div key={idx} className="glass-panel border-glow" style={{ padding: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '15px' }}>
                   <div>
                     <h4 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-primary)', lineHeight: '1.4' }}>
                       {cert.title}
                     </h4>
-                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--accent-secondary)', marginTop: '4px' }}>
+                    <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.82rem', color: 'var(--accent-secondary)', marginTop: '4px' }}>
                       {cert.issuer}
                     </p>
                   </div>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text-muted)', whiteSpace: 'nowrap' }}>
+                  <div style={{ 
+                    fontFamily: 'var(--font-mono)', 
+                    fontSize: '0.78rem', 
+                    color: 'var(--text-muted)', 
+                    whiteSpace: 'nowrap',
+                    background: 'rgba(0,0,0,0.1)',
+                    padding: '3px 8px',
+                    borderRadius: '4px'
+                  }}>
                     {cert.date}
                   </div>
                 </div>
@@ -384,9 +413,9 @@ const Dashboard = ({ theme }) => {
         </div>
       </section>
 
-      {/* 6. Secure Contact Section */}
+      {/* 7. Secure Contact Section */}
       <section id="contact" style={{ marginBottom: '20px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '30px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
           <Server size={24} style={{ color: 'var(--accent)' }} />
           <h2 style={{ fontSize: '1.75rem', fontWeight: 700 }}>SECURE_MAIL_GATEWAY</h2>
         </div>
