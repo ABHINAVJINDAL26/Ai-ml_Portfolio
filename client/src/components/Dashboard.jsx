@@ -24,7 +24,7 @@ const Dashboard = ({ theme }) => {
     <div className="container" style={{ paddingBottom: '80px', paddingTop: '40px' }}>
       
       {/* 1. Hero / Identity Section */}
-      <section id="about" className="glass-panel border-glow" style={{ padding: '40px', marginBottom: '40px', position: 'relative', overflow: 'hidden' }}>
+      <section id="about" className="glass-panel border-glow hero-card" style={{ position: 'relative', overflow: 'hidden' }}>
         {/* Decorative Grid Line */}
         <div style={{
           position: 'absolute', top: 0, right: 0, width: '120px', height: '120px',
@@ -32,29 +32,25 @@ const Dashboard = ({ theme }) => {
           pointerEvents: 'none'
         }} />
         
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
           <div>
-            <span style={{ 
-              fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--accent)', 
-              background: 'rgba(var(--accent-rgb), 0.08)', padding: '4px 10px', 
-              borderRadius: '20px', border: '1px solid rgba(var(--accent-rgb), 0.2)' 
-            }}>
+            <span className="system-badge">
               SYSTEM_INIT: SUCCESS // DATA_SCIENCE_ENG
             </span>
-            <h1 style={{ fontSize: '3rem', fontWeight: 800, marginTop: '15px', letterSpacing: '-1px' }}>
+            <h1 className="hero-name">
               {personal.name}
             </h1>
-            <p className="glow-cyan" style={{ fontFamily: 'var(--font-mono)', fontSize: '1.25rem', color: 'var(--accent-secondary)', marginTop: '5px' }}>
+            <p className="glow-cyan hero-title">
               &gt; {personal.title}
             </p>
           </div>
 
-          <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', lineHeight: '1.7', maxWidth: '800px' }}>
+          <p className="hero-summary">
             {personal.summary}
           </p>
 
           {/* Action CTAs: Download CV & Contact */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '14px', marginTop: '5px' }}>
+          <div className="hero-actions">
             <a
               href="/Abhinav_Jindal_Resume.pdf"
               download="Abhinav_Jindal_Resume.pdf"
@@ -87,21 +83,21 @@ const Dashboard = ({ theme }) => {
             </a>
           </div>
 
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', marginTop: '10px', borderTop: '1px solid var(--glass-border)', paddingTop: '20px' }}>
-            <a href={`mailto:${personal.email}`} style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.9rem', transition: 'color 0.3s' }} onMouseEnter={(e)=>e.target.style.color='var(--accent)'} onMouseLeave={(e)=>e.target.style.color='var(--text-secondary)'}>
-              <Mail size={16} /> {personal.email}
+          <div className="hero-contacts">
+            <a href={`mailto:${personal.email}`} className="hero-contact-item">
+              <Mail size={15} style={{ flexShrink: 0 }} /> <span>{personal.email}</span>
             </a>
-            <a href={`tel:${personal.phone.replace(/[\s-]/g, '')}`} style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.9rem', transition: 'color 0.3s' }} onMouseEnter={(e)=>e.target.style.color='var(--accent)'} onMouseLeave={(e)=>e.target.style.color='var(--text-secondary)'}>
-              <Phone size={16} /> {personal.phone}
+            <a href={`tel:${personal.phone.replace(/[\s-]/g, '')}`} className="hero-contact-item">
+              <Phone size={15} style={{ flexShrink: 0 }} /> <span>{personal.phone}</span>
             </a>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-              <MapPin size={16} /> {personal.location}
+            <span className="hero-contact-item">
+              <MapPin size={15} style={{ flexShrink: 0 }} /> <span>{personal.location}</span>
             </span>
-            <a href={personal.github} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.9rem', transition: 'color 0.3s' }} onMouseEnter={(e)=>e.target.style.color='var(--accent-secondary)'} onMouseLeave={(e)=>e.target.style.color='var(--text-secondary)'}>
-              <Github size={16} /> Github
+            <a href={personal.github} target="_blank" rel="noopener noreferrer" className="hero-contact-item">
+              <Github size={15} style={{ flexShrink: 0 }} /> <span>GitHub</span>
             </a>
-            <a href={personal.linkedin} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)', textDecoration: 'none', fontSize: '0.9rem', transition: 'color 0.3s' }} onMouseEnter={(e)=>e.target.style.color='var(--accent-secondary)'} onMouseLeave={(e)=>e.target.style.color='var(--text-secondary)'}>
-              <Linkedin size={16} /> LinkedIn
+            <a href={personal.linkedin} target="_blank" rel="noopener noreferrer" className="hero-contact-item">
+              <Linkedin size={15} style={{ flexShrink: 0 }} /> <span>LinkedIn</span>
             </a>
           </div>
         </div>

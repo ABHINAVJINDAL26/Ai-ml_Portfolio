@@ -149,17 +149,17 @@ function App() {
 
       {/* Cyber Security Banner indicator */}
       <div style={{
-        background: 'rgba(var(--accent-secondary-rgb), 0.08)',
+        background: 'rgba(var(--accent-secondary-rgb), 0.06)',
         borderBottom: '1px solid rgba(var(--accent-secondary-rgb), 0.15)',
         color: 'var(--text-secondary)',
         fontFamily: 'var(--font-mono)',
-        fontSize: '0.75rem',
-        padding: '6px 0',
+        fontSize: 'clamp(0.68rem, 2.2vw, 0.75rem)',
+        padding: '6px 12px',
         textAlign: 'center'
       }}>
-        <div className="container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '6px' }}>
-          <Shield size={12} style={{ color: 'var(--accent-secondary)' }} />
-          <span>SECURITY STATUS: SECURE_COMMS_ACTIVE // 99.99% HIGH AVAILABILITY</span>
+        <div className="container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+          <Shield size={12} style={{ color: 'var(--accent-secondary)', flexShrink: 0 }} />
+          <span>SECURE_COMMS_ACTIVE // 99.99% HIGH AVAILABILITY</span>
         </div>
       </div>
 
