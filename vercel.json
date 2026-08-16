@@ -41,7 +41,7 @@
       "destination": "/api/health.js"
     },
     {
-      "source": "/(.*)",
+      "source": "/((?!assets/|.*\\.[\\w]+$).*)",
       "destination": "/index.html"
     }
   ]
