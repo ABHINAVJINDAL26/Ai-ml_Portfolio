@@ -6,7 +6,7 @@ export const cvData = {
     phone: "+91 9571441853",
     email: "jabhinav198@gmail.com",
     linkedin: "https://www.linkedin.com/in/abhinav--jindal/",
-    github: "https://github.com/AbhinavJindal",
+    github: "https://github.com/ABHINAVJINDAL26",
     tagline: "Building intelligent systems using Time-Series Forecasting, Machine Learning, and Full-Stack Engineering.",
     summary: "Computer Science and Engineering student at Lovely Professional University with a strong academic record (CGPA: 8.00) and practical experience in AI, cloud systems, and data analytics. Proven track record of improving ML model accuracies, designing time-series forecasting pipelines, and building AI-powered resume and interview assistants. Highly proficient in Python, SQL, Java, Scikit-learn, and Web Technologies."
   },

@@ -216,6 +216,16 @@ const ContactForm = () => {
         >
           <ExternalLink size={13} /> LINKEDIN
         </a>
+
+        <a
+          href="https://github.com/ABHINAVJINDAL26"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="tech-button"
+          style={{ fontSize: '0.75rem', padding: '6px 10px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+        >
+          <ExternalLink size={13} /> GITHUB
+        </a>
       </div>
 
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
